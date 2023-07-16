@@ -1,4 +1,8 @@
 //local host to test server  127.0.0.1:3000
+
+//we use what is under start in package.json (nodemon servermain.js) to run the server.
+
+
 //We start receiving the request in this main file. and depending on the rout it will go to the route and execute one of the controllers. and then the response gets send 
 //this main file is usually used for middleware declarations that we want to apply to all the routes.
 
@@ -12,7 +16,9 @@ const app =  express(); //it will add manmy methods to this variable
 
 //MIDDLEWARES - these will be applied to all of the routes
 
-app.use(morgan('dev'));  //calling 3rd party middleware 'morgan'
+if(process.env.NODE_ENV === 'development'){ //only use morgan if in  development env
+    app.use(morgan('dev'));  //calling 3rd party middleware 'morgan'
+}
 
 app.use(express.json()); //express.json is middleware ( which is a function that can modify the incoming request data. Middleware is a process between the request and response)
 
